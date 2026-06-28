@@ -123,6 +123,7 @@ PRESET_TASKS = [
     "Müll rausbringen",
     "Staubsaugen",
     "Tisch abwischen",
+    "Einkaufen (notitz)"
 ]
 
 # --- Eltern-Sicht ---
