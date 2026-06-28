@@ -2,11 +2,13 @@ import streamlit as st
 import datetime
 import firebase_admin
 from firebase_admin import credentials, db
+import json
 
 try:
     firebase_admin.get_app()
 except ValueError:
-    cred = credentials.Certificate(st.secrets["firebase_key"])
+    key_dict = json.loads(st.secrets["firebase_key"])
+    cred = credentials.Certificate(key_dict)
     firebase_admin.initialize_app(cred, {
         "databaseURL": "https://familychore-1f7d7-default-rtdb.europe-west1.firebasedatabase.app/"
     })
