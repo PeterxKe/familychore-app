@@ -8,7 +8,7 @@ try:
 except ValueError:
     cred = credentials.Certificate(st.secrets["firebase_key"])
     firebase_admin.initialize_app(cred, {
-        "databaseURL": "https://familychore-1f7d7-default-rtdb.europe-west1.firebasedatabase.app/"
+        "https://familychore-1f7d7-default-rtdb.europe-west1.firebasedatabase.app"
     })
 
 
