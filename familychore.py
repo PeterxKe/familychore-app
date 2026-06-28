@@ -9,6 +9,7 @@ if not firebase_admin._apps:
         "databaseURL": "https://familychore-1f7d7-default-rtdb.europe-west1.firebasedatabase.app/"
     })
 
+
 st.set_page_config(page_title="Family Chore App", page_icon="🧹")
 
 # --- Session State ---
