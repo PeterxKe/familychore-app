@@ -222,6 +222,8 @@ if st.session_state.role == "child":
     # --- Aufgaben aus Firebase laden ---
     tasks_ref = db.reference(f"families/{CURRENT_FAMILY}/tasks")
     firebase_tasks = tasks_ref.get()
+    
+    uploaded_file = st.file_uploader("Bild hochladen", type=["png", "jpg", "jpeg"])
 
     if not firebase_tasks:
         st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
