@@ -5,11 +5,6 @@ from firebase_admin import credentials, db
 import json
 import smtplib
 from email.mime.text import MIMEText
-from firebase_admin import storage
-
-bucket = storage.bucket()
-blob = bucket.blob(f"families/{fam_name}/proof.png")
-blob.upload_from_string(uploaded_file.getvalue(), content_type="image/png")
 
 
 def send_email(to, subject, body):
@@ -229,20 +224,6 @@ if st.session_state.role == "child":
     tasks_ref = db.reference(f"families/{CURRENT_FAMILY}/tasks")
     firebase_tasks = tasks_ref.get()
     
-    st.subheader("Beweisfoto hochladen")
-    uploaded_file = st.file_uploader("Foto auswählen", type=["png", "jpg", "jpeg"])
-    
-    if uploaded_file:
-        st.image(uploaded_file, caption="Hochgeladenes Bild")
-    
-        # In Firebase speichern
-        bucket = storage.bucket()
-        blob = bucket.blob(f"families/{fam_name}/proof.png")
-        blob.upload_from_string(uploaded_file.getvalue(), content_type="image/png")
-    
-        st.success("Foto erfolgreich hochgeladen!")
-
-
     if not firebase_tasks:
         st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
     else:
