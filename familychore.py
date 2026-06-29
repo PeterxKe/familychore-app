@@ -105,6 +105,7 @@ if st.session_state.auth_mode == "login" and (st.session_state.family is None or
             
             if last_reset != today:
                 db.reference(f"families/{fam_name}/tasks").set([])
+                db.reference(f"families/{fam_name}/note").set([])
                 db.reference(f"families/{fam_name}/last_reset").set(today)
 
             st.success(f"Erfolgreich eingeloggt als {found_role} von {found_family}")
