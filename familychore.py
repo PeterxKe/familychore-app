@@ -6,7 +6,6 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 
-
 def send_email(to, subject, body):
     sender = "kemmeterpeter@gmail.com"
     app_password = "sgxx grzn kdrk poef"
@@ -204,6 +203,17 @@ if st.session_state.role == "parent":
         for t in firebase_tasks:
             status_icon = "✅" if t["status"] == "done" else "⏳"
             st.write(f"{status_icon} {t['title']} – {t['status']}")
+            if t["status"] == "done":
+                data = db.reference(f"families/{fam_name}/proof").get()
+
+                if data:
+                    import base64, io
+                    from PIL import Image
+                
+                    img = Image.open(io.BytesIO(base64.b64decode(data)))
+                    st.image(img)
+
+    
 
 # --- Kinder-Sicht ---
 if st.session_state.role == "child":
@@ -219,11 +229,26 @@ if st.session_state.role == "child":
         st.info(f"Notiz von deinem Elternteil: {note}")
 
     st.subheader("Heutige Aufgaben")
-
-    # --- Aufgaben aus Firebase laden ---
-    tasks_ref = db.reference(f"families/{CURRENT_FAMILY}/tasks")
-    firebase_tasks = tasks_ref.get()
     
+    st.subheader("Beweisfoto hochladen")
+    uploaded_file = st.file_uploader("Bild hochladen", type=["png", "jpg", "jpeg"])
+    
+    if uploaded_file:
+        import base64
+    
+        # Bild in Base64 umwandeln
+        encoded = base64.b64encode(uploaded_file.getvalue()).decode("utf-8")
+    
+        # In Firebase speichern
+        db.reference(f"families/{fam_name}/proof").set(encoded)
+    
+        st.success("Bild erfolgreich hochgeladen!")
+    
+    
+        # --- Aufgaben aus Firebase laden ---
+        tasks_ref = db.reference(f"families/{CURRENT_FAMILY}/tasks")
+        firebase_tasks = tasks_ref.get()
+        
     if not firebase_tasks:
         st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
     else:
