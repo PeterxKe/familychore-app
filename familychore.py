@@ -94,7 +94,12 @@ if st.session_state.auth_mode == "register":
                 Familychore ist eine APP die ihnen im Alltag hilft, sie können ihrem Kind Aufgaben senden, ggf. mit einer kleinen Notitz, und ihr Kind kann diese Aufgaben dann abhaken,
                 die idee dabei ist wenn sie zB. allein-ehrziehend sind und/oder lange arbeiten sind und ihr Kind alleine Zuhause ist, dass sie dem Kind Aufgaben senden können und das Kind diese Aufgaben
                 selbstständig über diese APP abrufen und, wenn das Kind die Aufgaben erledigthat, diese dann abhaken Kann.
-                -Ihre E-Mail wird sicher in einer Firebase-Cloud aufbeward und nur für diesen Zweck benutzt, wenn sie nicht einverstanden damit sind dann loggen sie sich bitte aus und schreiben eine E-Mail an uns! -kemmeterpeter@gmail.com-"""
+                -Ihre E-Mail wird sicher in einer Firebase-Cloud aufbeward und nur für diesen Zweck benutzt, wenn sie nicht einverstanden damit sind dann loggen sie sich bitte aus und schreiben eine E-Mail an uns! -kemmeterpeter@gmail.com-
+                weitere APPs die sie interessieren könnten: 
+                • x-calculator.streamlit.app 
+                • lotto_web.streamlit.app
+                • gamblig.streamlit.app
+                • share.streamlit.io/user/peterxke"""
             )
 
             st.success("Familie erfolgreich registriert!")
