@@ -3,6 +3,22 @@ import datetime
 import firebase_admin
 from firebase_admin import credentials, db
 import json
+import smtplib
+from email.mime.text import MIMEText
+
+def send_email(to, subject, body):
+    sender = "kemmeterpeter@gmail.com"
+    app_password = "sgxx grzn kdrk poef"
+
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = sender
+    msg["To"] = to
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender, app_password)
+        server.sendmail(sender, to, msg.as_string())
+
 
 try:
     firebase_admin.get_app()
@@ -56,6 +72,7 @@ if st.session_state.auth_mode == "register":
     fam_name = st.text_input("Familienname:")
     parent_pw = st.text_input("Eltern-Passwort:", type="password")
     child_pw = st.text_input("Kinder-Passwort:", type="password")
+    email_user = st.text_input("Email des Elternteils:")
 
     if st.button("Registrieren"):
         if fam_name == "" or parent_pw == "" or child_pw == "":
@@ -68,6 +85,12 @@ if st.session_state.auth_mode == "register":
                 "tasks": [],
                 "note": ""
             })
+            send_email(
+                to="email_user",
+                subject="Registrierung erfolgreich!",
+                body="Danke, dass Sie sich registriert haben!"
+            )
+            db.reference(f"families/{fam_name}/Email").set(email_user)
             st.success("Familie erfolgreich registriert!")
             st.session_state.auth_mode = "login"
             st.rerun()
