@@ -230,7 +230,7 @@ if st.session_state.role == "child":
 
     st.subheader("Heutige Aufgaben")
     if not firebase_tasks:
-    st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
+        st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
     else:
         st.session_state.tasks = firebase_tasks
 
