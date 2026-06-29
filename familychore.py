@@ -204,7 +204,7 @@ if st.session_state.role == "parent":
             status_icon = "✅" if t["status"] == "done" else "⏳"
             st.write(f"{status_icon} {t['title']} – {t['status']}")
             if t["status"] == "done":
-                data = db.reference(f"families/{fam_name}/proof").get()
+                data = db.reference(f"families/{CURRENT_FAMILY}/proof").get()
 
                 if data:
                     import base64, io
