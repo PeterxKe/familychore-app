@@ -90,11 +90,11 @@ if st.session_state.auth_mode == "register":
             send_email(
                 to=email_user,
                 subject="Registrierung erfolgreich!",
-                body="Danke, dass Sie sich registriert haben!
+                body="""Danke, dass Sie sich registriert haben!
                 Familychore ist eine APP die ihnen im Alltag hilft, sie können ihrem Kind Aufgaben senden, ggf. mit einer kleinen Notitz, und ihr Kind kann diese Aufgaben dann abhaken,
                 die idee dabei ist wenn sie zB. allein-ehrziehend sind und/oder lange arbeiten sind und ihr Kind alleine Zuhause ist, dass sie dem Kind Aufgaben senden können und das Kind diese Aufgaben
                 selbstständig über diese APP abrufen und, wenn das Kind die Aufgaben erledigthat, diese dann abhaken Kann.
-                -Ihre E-Mail wird sicher in einer Firebase-Cloud aufbeward und nur für diesen Zweck benutzt, wenn sie nicht einverstanden damit sind dann loggen sie sich bitte aus und schreiben eine E-Mail an uns! -kemmeterpeter@gmail.com-"
+                -Ihre E-Mail wird sicher in einer Firebase-Cloud aufbeward und nur für diesen Zweck benutzt, wenn sie nicht einverstanden damit sind dann loggen sie sich bitte aus und schreiben eine E-Mail an uns! -kemmeterpeter@gmail.com-"""
             )
 
             st.success("Familie erfolgreich registriert!")
