@@ -35,14 +35,6 @@ if "current_date" not in st.session_state:
 if "note" not in st.session_state:
     st.session_state.note = ""
 
-# --- Daily Reset (einfacher Reset, wenn Datum wechselt) ---
-today = datetime.date.today()
-if st.session_state.current_date != today and st.session_state.family is not None:
-    st.session_state.current_date = today
-    # Reset nur für eingeloggte Familie
-    db.reference(f"families/{st.session_state.family}/tasks").set([])
-    st.session_state.tasks = []
-
 # --- Titel ---
 st.title("Family Chore App 🧹")
 
@@ -107,6 +99,14 @@ if st.session_state.auth_mode == "login" and (st.session_state.family is None or
         if found_family:
             st.session_state.family = found_family
             st.session_state.role = found_role
+
+            today = str(datetime.date.today())
+            last_reset = db.reference(f"families/{fam_name}/last_reset").get()
+            
+            if last_reset != today:
+                db.reference(f"families/{fam_name}/tasks").set([])
+                db.reference(f"families/{fam_name}/last_reset").set(today)
+
             st.success(f"Erfolgreich eingeloggt als {found_role} von {found_family}")
             st.rerun()
         else:
