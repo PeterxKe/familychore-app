@@ -227,7 +227,11 @@ if st.session_state.role == "child":
     if note:
         st.session_state.note = note
         st.info(f"Notiz von deinem Elternteil: {note}")
-
+        
+    # --- Aufgaben aus Firebase laden ---
+    tasks_ref = db.reference(f"families/{CURRENT_FAMILY}/tasks")
+    firebase_tasks = tasks_ref.get()
+        
     st.subheader("Heutige Aufgaben")
     if not firebase_tasks:
         st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
