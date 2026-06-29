@@ -229,7 +229,24 @@ if st.session_state.role == "child":
         st.info(f"Notiz von deinem Elternteil: {note}")
 
     st.subheader("Heutige Aufgaben")
-    
+    if not firebase_tasks:
+    st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
+    else:
+        st.session_state.tasks = firebase_tasks
+
+        for i, task in enumerate(st.session_state.tasks):
+            cols = st.columns([3, 1])
+
+            with cols[0]:
+                status_icon = "✅" if task["status"] == "done" else "⏳"
+                st.write(f"{status_icon} {task['title']}")
+
+            with cols[1]:
+                if task["status"] == "pending":
+                    if st.button("Done", key=f"done_{i}"):
+                        db.reference(f"families/{CURRENT_FAMILY}/tasks/{i}/status").set("done")
+                        st.rerun()
+                        
     st.subheader("Beweisfoto hochladen")
     uploaded_file = st.file_uploader("Bild hochladen", type=["png", "jpg", "jpeg"])
     
@@ -249,23 +266,7 @@ if st.session_state.role == "child":
         tasks_ref = db.reference(f"families/{CURRENT_FAMILY}/tasks")
         firebase_tasks = tasks_ref.get()
         
-    if not firebase_tasks:
-        st.info("Heute wurden dir noch keine Aufgaben zugewiesen.")
-    else:
-        st.session_state.tasks = firebase_tasks
 
-        for i, task in enumerate(st.session_state.tasks):
-            cols = st.columns([3, 1])
-
-            with cols[0]:
-                status_icon = "✅" if task["status"] == "done" else "⏳"
-                st.write(f"{status_icon} {task['title']}")
-
-            with cols[1]:
-                if task["status"] == "pending":
-                    if st.button("Done", key=f"done_{i}"):
-                        db.reference(f"families/{CURRENT_FAMILY}/tasks/{i}/status").set("done")
-                        st.rerun()
 
 # --- Sidebar ---
 st.sidebar.header("Menü")
