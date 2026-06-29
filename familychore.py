@@ -261,7 +261,7 @@ if st.session_state.role == "child":
         encoded = base64.b64encode(uploaded_file.getvalue()).decode("utf-8")
     
         # In Firebase speichern
-        db.reference(f"families/{fam_name}/proof").set(encoded)
+        db.reference(f"families/{CURRENT_FAMILY}/proof").set(encoded)
     
         st.success("Bild erfolgreich hochgeladen!")
     
