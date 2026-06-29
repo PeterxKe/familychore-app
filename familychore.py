@@ -72,29 +72,32 @@ if st.session_state.auth_mode == "register":
     fam_name = st.text_input("Familienname:")
     parent_pw = st.text_input("Eltern-Passwort:", type="password")
     child_pw = st.text_input("Kinder-Passwort:", type="password")
-    email_user = st.text_input("Email des Elternteils:")
+email_user = st.text_input("Email der Familie:")
 
-    if st.button("Registrieren"):
-        if fam_name == "" or parent_pw == "" or child_pw == "":
-            st.error("Bitte alle Felder ausfüllen!")
-        else:
-            ref = db.reference(f"families/{fam_name}")
-            ref.set({
-                "parent_pw": parent_pw,
-                "child_pw": child_pw,
-                "tasks": [],
-                "note": ""
-            })
-            send_email(
-                to="email_user",
-                subject="Registrierung erfolgreich!",
-                body="Danke, dass Sie sich registriert haben!"
-            )
-            db.reference(f"families/{fam_name}/Email").set(email_user)
-            st.success("Familie erfolgreich registriert!")
-            st.session_state.auth_mode = "login"
-            st.rerun()
-    st.stop()
+if st.button("Registrieren"):
+    if fam_name == "" or parent_pw == "" or child_pw == "" or email_user == "":
+        st.error("Bitte alle Felder ausfüllen!")
+    else:
+        ref = db.reference(f"families/{fam_name}")
+        ref.set({
+            "parent_pw": parent_pw,
+            "child_pw": child_pw,
+            "tasks": [],
+            "note": "",
+            "email": email_user
+        })
+
+        send_email(
+            to=email_user,
+            subject="Registrierung erfolgreich!",
+            body="Danke, dass Sie sich registriert haben!"
+        )
+
+        st.success("Familie erfolgreich registriert!")
+        st.session_state.auth_mode = "login"
+        st.rerun()
+
+st.stop()
 
 # --- Login (Familie + Rolle über Passwort) ---
 if st.session_state.auth_mode == "login" and (st.session_state.family is None or st.session_state.role is None):
