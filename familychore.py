@@ -12,7 +12,8 @@ if "page" not in st.session_state:
 
 def show_datenschutz():
     st.title("Datenschutzerklärung")
-    st.write("""Datenschutzerklärung für FamilyChore
+    st.write("""
+    Datenschutzerklärung für FamilyChore
 
     1. Verantwortlicher  
     Verantwortlich für die Verarbeitung der Daten in dieser App ist:
@@ -83,7 +84,8 @@ def show_datenschutz():
     
     9. Änderungen der Datenschutzerklärung  
     Diese Datenschutzerklärung kann angepasst werden, wenn die App erweitert wird.
-    Die aktuelle Version ist immer in der App einsehbar.""")
+    Die aktuelle Version ist immer in der App einsehbar.
+    """)
 
 if st.session_state.page == "datenschutz":
     show_datenschutz()
