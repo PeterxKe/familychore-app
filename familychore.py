@@ -82,12 +82,13 @@ def show_datenschutz():
     Die aktuelle Version ist immer in der App einsehbar.""")
     st.markdown("[📄 Datenschutzerklärung](?page=datenschutz)")
 
+query_params = st.query_params
+page = query_params.get("page", ["home"])[0]
+
+
 if page == "datenschutz":
     show_datenschutz()
     st.stop()
-
-query_params = st.query_params
-page = query_params.get("page", ["home"])[0]
 
 def send_email(to, subject, body):
     sender = "kemmeterpeter@gmail.com"
