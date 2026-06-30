@@ -8,8 +8,7 @@ from email.mime.text import MIMEText
 
 def show_datenschutz():
     st.title("Datenschutzerklärung")
-    st.write("""
-    Datenschutzerklärung für FamilyChore
+    st.write("""Datenschutzerklärung für FamilyChore
 
     1. Verantwortlicher  
     Verantwortlich für die Verarbeitung der Daten in dieser App ist:
@@ -80,8 +79,7 @@ def show_datenschutz():
     
     9. Änderungen der Datenschutzerklärung  
     Diese Datenschutzerklärung kann angepasst werden, wenn die App erweitert wird.
-    Die aktuelle Version ist immer in der App einsehbar.
-    """)
+    Die aktuelle Version ist immer in der App einsehbar.""")
 
 
 query_params = st.query_params
