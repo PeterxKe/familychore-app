@@ -80,10 +80,9 @@ def show_datenschutz():
     9. Änderungen der Datenschutzerklärung  
     Diese Datenschutzerklärung kann angepasst werden, wenn die App erweitert wird.
     Die aktuelle Version ist immer in der App einsehbar.""")
-
-query_params = st.query_params
-page = query_params.get("page", ["home"])[0]
-
+    
+params = st.experimental_get_query_params()
+page = params.get("page", ["home"])[0]
 
 if page == "datenschutz":
     show_datenschutz()
