@@ -6,6 +6,84 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 
+def show_datenschutz():
+    st.title("Datenschutzerklärung")
+    st.write("""
+    Datenschutzerklärung für FamilyChore
+
+    1. Verantwortlicher  
+    Verantwortlich für die Verarbeitung der Daten in dieser App ist:
+    FamilyChore – Privatprojekt
+    E‑Mail: kemmeterpeter@gmail.com
+    
+    2. Welche Daten werden verarbeitet?  
+    In der App werden folgende Daten gespeichert:
+    – E‑Mail‑Adresse der Eltern
+    – Familienname
+    – Passwörter der Eltern und Kinder (gehasht, nicht im Klartext)
+    – Aufgaben und Notizen, die zwischen Eltern und Kindern ausgetauscht werden
+    – Bilder, die Kinder oder Eltern hochladen (z. B. zur Bestätigung erledigter Aufgaben)
+    – Zeitstempel, wann Aufgaben erstellt oder erledigt wurden
+    
+    Es werden keine weiteren Daten erhoben.
+    
+    3. Zweck der Verarbeitung  
+    Die Daten werden ausschließlich verarbeitet, um die Funktionen der App bereitzustellen:
+    – Aufgaben zwischen Eltern und Kindern verwalten
+    – Bilder anzeigen, die Aufgaben bestätigen
+    – Anmeldung und Login ermöglichen
+    – Familien‑Daten synchronisieren
+    
+    Die Daten werden nicht für Werbung, Tracking oder andere Zwecke genutzt.
+    
+    4. Speicherung der Daten  
+    Die Daten werden in der Firebase Realtime Database gespeichert.
+    Bilder werden als Base64‑Text gespeichert, damit sie innerhalb der App angezeigt werden können.
+    Es findet keine Weitergabe der Daten an Dritte statt.
+    
+    5. Zugriff auf Daten  
+    Auf die Daten können nur folgende Personen zugreifen:
+    – Die Familie selbst, die die App nutzt
+    – Der Betreiber der App, ausschließlich zur technischen Wartung
+    
+    Der Betreiber nutzt die Daten nicht aktiv und sieht sie nicht ein, außer wenn es technisch notwendig ist (z. B. Fehlerbehebung).
+    
+    6. Löschung der Daten  
+    Nutzer können jederzeit verlangen, dass ihre Daten gelöscht werden.
+    Dazu reicht eine E‑Mail an: kemmeterpeter@gmail.com
+    
+    Nach der Anfrage werden alle Daten vollständig gelöscht:
+    – E‑Mail
+    – Passwörter
+    – Aufgaben
+    – Bilder
+    – Familien‑Daten
+    
+    7. Sicherheit  
+    Die App nutzt die Sicherheitsmechanismen von Firebase:
+    – Zugriffsbeschränkungen
+    – Authentifizierung
+    – Datenbank‑Regeln
+    
+    Passwörter werden nicht im Klartext, sondern als Hash gespeichert.
+    
+    8. Rechte der Nutzer  
+    Nutzer haben folgende Rechte:
+    – Recht auf Auskunft
+    – Recht auf Berichtigung
+    – Recht auf Löschung
+    – Recht auf Einschränkung der Verarbeitung
+    – Recht auf Datenübertragbarkeit
+    – Recht auf Widerspruch
+    
+    Eine Anfrage kann jederzeit per E‑Mail gestellt werden.
+    
+    9. Änderungen der Datenschutzerklärung  
+    Diese Datenschutzerklärung kann angepasst werden, wenn die App erweitert wird.
+    Die aktuelle Version ist immer in der App einsehbar.
+    """)
+
+
 query_params = st.query_params
 page = query_params.get("page", ["home"])[0]
 
@@ -288,79 +366,3 @@ if st.sidebar.button("🔙 Logout"):
     st.session_state.auth_mode = None
     st.rerun()
 
-def show_datenschutz():
-    st.title("Datenschutzerklärung")
-    st.write("""
-    Datenschutzerklärung für FamilyChore
-
-    1. Verantwortlicher  
-    Verantwortlich für die Verarbeitung der Daten in dieser App ist:
-    FamilyChore – Privatprojekt
-    E‑Mail: kemmeterpeter@gmail.com
-    
-    2. Welche Daten werden verarbeitet?  
-    In der App werden folgende Daten gespeichert:
-    – E‑Mail‑Adresse der Eltern
-    – Familienname
-    – Passwörter der Eltern und Kinder (gehasht, nicht im Klartext)
-    – Aufgaben und Notizen, die zwischen Eltern und Kindern ausgetauscht werden
-    – Bilder, die Kinder oder Eltern hochladen (z. B. zur Bestätigung erledigter Aufgaben)
-    – Zeitstempel, wann Aufgaben erstellt oder erledigt wurden
-    
-    Es werden keine weiteren Daten erhoben.
-    
-    3. Zweck der Verarbeitung  
-    Die Daten werden ausschließlich verarbeitet, um die Funktionen der App bereitzustellen:
-    – Aufgaben zwischen Eltern und Kindern verwalten
-    – Bilder anzeigen, die Aufgaben bestätigen
-    – Anmeldung und Login ermöglichen
-    – Familien‑Daten synchronisieren
-    
-    Die Daten werden nicht für Werbung, Tracking oder andere Zwecke genutzt.
-    
-    4. Speicherung der Daten  
-    Die Daten werden in der Firebase Realtime Database gespeichert.
-    Bilder werden als Base64‑Text gespeichert, damit sie innerhalb der App angezeigt werden können.
-    Es findet keine Weitergabe der Daten an Dritte statt.
-    
-    5. Zugriff auf Daten  
-    Auf die Daten können nur folgende Personen zugreifen:
-    – Die Familie selbst, die die App nutzt
-    – Der Betreiber der App, ausschließlich zur technischen Wartung
-    
-    Der Betreiber nutzt die Daten nicht aktiv und sieht sie nicht ein, außer wenn es technisch notwendig ist (z. B. Fehlerbehebung).
-    
-    6. Löschung der Daten  
-    Nutzer können jederzeit verlangen, dass ihre Daten gelöscht werden.
-    Dazu reicht eine E‑Mail an: kemmeterpeter@gmail.com
-    
-    Nach der Anfrage werden alle Daten vollständig gelöscht:
-    – E‑Mail
-    – Passwörter
-    – Aufgaben
-    – Bilder
-    – Familien‑Daten
-    
-    7. Sicherheit  
-    Die App nutzt die Sicherheitsmechanismen von Firebase:
-    – Zugriffsbeschränkungen
-    – Authentifizierung
-    – Datenbank‑Regeln
-    
-    Passwörter werden nicht im Klartext, sondern als Hash gespeichert.
-    
-    8. Rechte der Nutzer  
-    Nutzer haben folgende Rechte:
-    – Recht auf Auskunft
-    – Recht auf Berichtigung
-    – Recht auf Löschung
-    – Recht auf Einschränkung der Verarbeitung
-    – Recht auf Datenübertragbarkeit
-    – Recht auf Widerspruch
-    
-    Eine Anfrage kann jederzeit per E‑Mail gestellt werden.
-    
-    9. Änderungen der Datenschutzerklärung  
-    Diese Datenschutzerklärung kann angepasst werden, wenn die App erweitert wird.
-    Die aktuelle Version ist immer in der App einsehbar.
-    """)
