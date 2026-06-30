@@ -6,6 +6,10 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 
+if "page" not in st.session_state:
+    st.session_state.page = "home"
+
+
 def show_datenschutz():
     st.title("Datenschutzerklärung")
     st.write("""Datenschutzerklärung für FamilyChore
@@ -80,11 +84,8 @@ def show_datenschutz():
     9. Änderungen der Datenschutzerklärung  
     Diese Datenschutzerklärung kann angepasst werden, wenn die App erweitert wird.
     Die aktuelle Version ist immer in der App einsehbar.""")
-    
-params = st.experimental_get_query_params()
-page = params.get("page", ["home"])[0]
 
-if page == "datenschutz":
+if st.session_state.page == "datenschutz":
     show_datenschutz()
     st.stop()
 
@@ -150,7 +151,10 @@ if st.session_state.auth_mode is None:
 # --- Registrierung ---
 if st.session_state.auth_mode == "register":
     st.subheader("Familie registrieren")
-    st.markdown("[📄 Datenschutzerklärung](?page=datenschutz)")
+    st.markdown(
+        '<a href="#" onclick="window.location.search=\'?page=datenschutz\';">📄 Datenschutzerklärung</a>',
+        unsafe_allow_html=True
+    )
     
     fam_name = st.text_input("Familienname:")
     parent_pw = st.text_input("Eltern-Passwort:", type="password")
