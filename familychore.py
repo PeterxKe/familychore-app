@@ -151,10 +151,9 @@ if st.session_state.auth_mode is None:
 # --- Registrierung ---
 if st.session_state.auth_mode == "register":
     st.subheader("Familie registrieren")
-    st.markdown(
-        '<a href="#" onclick="window.location.search=\'?page=datenschutz\';">📄 Datenschutzerklärung</a>',
-        unsafe_allow_html=True
-    )
+    if st.button("📄 Datenschutzerklärung"):
+        st.session_state.page = "datenschutz"
+        st.rerun()
     
     fam_name = st.text_input("Familienname:")
     parent_pw = st.text_input("Eltern-Passwort:", type="password")
