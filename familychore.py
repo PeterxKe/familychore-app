@@ -80,7 +80,6 @@ def show_datenschutz():
     9. Änderungen der Datenschutzerklärung  
     Diese Datenschutzerklärung kann angepasst werden, wenn die App erweitert wird.
     Die aktuelle Version ist immer in der App einsehbar.""")
-    st.markdown("[📄 Datenschutzerklärung](?page=datenschutz)")
 
 query_params = st.query_params
 page = query_params.get("page", ["home"])[0]
@@ -152,7 +151,8 @@ if st.session_state.auth_mode is None:
 # --- Registrierung ---
 if st.session_state.auth_mode == "register":
     st.subheader("Familie registrieren")
-
+    st.markdown("[📄 Datenschutzerklärung](?page=datenschutz)")
+    
     fam_name = st.text_input("Familienname:")
     parent_pw = st.text_input("Eltern-Passwort:", type="password")
     child_pw = st.text_input("Kinder-Passwort:", type="password")
