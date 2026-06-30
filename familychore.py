@@ -85,10 +85,6 @@ def show_datenschutz():
 query_params = st.query_params
 page = query_params.get("page", ["home"])[0]
 
-if page == "datenschutz":
-    show_datenschutz()
-    st.stop()
-
 def send_email(to, subject, body):
     sender = "kemmeterpeter@gmail.com"
     app_password = "sgxx grzn kdrk poef"
@@ -152,6 +148,9 @@ if st.session_state.auth_mode is None:
 if st.session_state.auth_mode == "register":
     st.subheader("Familie registrieren")
     st.markdown("[📄 Datenschutzerklärung](?page=datenschutz)")
+    if page == "datenschutz":
+        show_datenschutz()
+        st.stop()
 
     fam_name = st.text_input("Familienname:")
     parent_pw = st.text_input("Eltern-Passwort:", type="password")
