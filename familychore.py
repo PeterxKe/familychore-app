@@ -10,17 +10,17 @@ AVATARS = {
     "cat": {
         "name": "Katze",
         "cost": 50,
-        "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/cat.png"
+        "img": "https://cdn-icons-png.flaticon.com/512/616/616430.png"
     },
     "robot": {
         "name": "Roboter",
         "cost": 100,
-        "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/android.png"
+        "img": "https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
     },
     "ninja": {
         "name": "Ninja",
         "cost": 150,
-        "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user-secret.png"
+        "img": "https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
     }
 }
 
