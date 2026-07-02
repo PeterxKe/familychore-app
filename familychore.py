@@ -28,6 +28,42 @@ AVATARS = {
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
+def show_profile():
+    CURRENT_FAMILY = st.session_state.family
+
+    st.title("👤 Profil")
+
+    # Avatar laden
+    owned = db.reference(f"families/{CURRENT_FAMILY}/avatars").get() or {}
+    selected_avatar = None
+    for key in AVATARS:
+        if owned.get(key):
+            selected_avatar = key
+            break
+
+    # Avatar anzeigen
+    if selected_avatar:
+        st.image(AVATARS[selected_avatar]["img"], width=80)
+    else:
+        st.image("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user.png", width=80)
+
+    # Familienname
+    st.subheader(f"Familie: {CURRENT_FAMILY}")
+
+    # Punkte
+    points = db.reference(f"families/{CURRENT_FAMILY}/points").get() or 0
+    st.write(f"**Punkte:** {points}")
+
+    # Aufgaben-Statistik
+    tasks = db.reference(f"families/{CURRENT_FAMILY}/tasks").get() or []
+    done = sum(1 for t in tasks if t.get("status") == "done")
+    pending = sum(1 for t in tasks if t.get("status") == "pending")
+
+    st.write("### Aufgaben-Statistik")
+    st.write(f"Erledigt: {done}")
+    st.write(f"Offen: {pending}")
+
+
 def show_avatarshop():
     st.title("Avatarshop 😺")
 
@@ -383,7 +419,6 @@ if st.session_state.role == "parent":
     
 
 # --- Kinder-Sicht ---
-
 if st.session_state.role == "child":
     st.header("🧒 Kinder-Dashboard")
 
@@ -462,6 +497,10 @@ st.sidebar.header("Menü")
 if st.session_state.role == "child":
     if st.sidebar.button("😺 Avatarshop"):
         st.session_state.page = "avatarshop"
+        st.rerun()
+
+    if st.sidebar.button("👤 Profil"):
+        st.session_state.page = "profile"
         st.rerun()
 
 if st.sidebar.button("🔙 Logout"):
