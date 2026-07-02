@@ -12,6 +12,13 @@ if "page" not in st.session_state:
 def show_avatarshop():
     st.title("Avatarshop 😺")
 
+    CURRENT_FAMILY = st.session_state.family
+
+    if st.session_state.page == "avatarshop":
+        show_avatarshop()
+        st.stop()
+
+
     points = db.reference(f"families/{CURRENT_FAMILY}/points").get() or 0
     st.write(f"Du hast **{points} Punkte**")
     AVATARS = {
