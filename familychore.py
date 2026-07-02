@@ -364,7 +364,7 @@ AVATARS = {
 
 if st.session_state.role == "child":
     st.header("🧒 Kinder-Dashboard")
-        # Avatar laden
+    # Avatar laden
 
     owned = db.reference(f"families/{CURRENT_FAMILY}/avatars").get() or {}
     
