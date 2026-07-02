@@ -114,6 +114,11 @@ def show_avatarshop():
                         st.rerun()
                 else:
                     st.write("❌")
+    
+    if st.sidebar.button("🔙zurück"):
+        st.session_state.page = "dashboard"
+        st.rerun()
+
 
 
 def show_datenschutz():
