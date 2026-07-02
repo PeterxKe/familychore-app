@@ -379,7 +379,7 @@ if st.session_state.role == "child":
         if selected_avatar:
             st.image(AVATARS[selected_avatar]["img"], width=40)
         else:
-            st.image("https://i.imgur.com/3ZQ3ZQO.png", width=40)  # Default Avatar
+            st.image("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user.png", width=40) # Default Avatar
     
     with cols[1]:
         st.write(f"**Familie: {CURRENT_FAMILY}**")
