@@ -6,6 +6,12 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 
+AVATARS = {
+    "cat": {"img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/cat.png"},
+    "robot": {"img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/android.png"},
+    "ninja": {"img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user-secret.png"}
+}
+
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
@@ -353,11 +359,6 @@ if st.session_state.role == "parent":
                 
                     img = Image.open(io.BytesIO(base64.b64decode(data)))
                     st.image(img)
-AVATARS = {
-    "cat": {"img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/cat.png"},
-    "robot": {"img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/android.png"},
-    "ninja": {"img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user-secret.png"}
-}
     
 
 # --- Kinder-Sicht ---
