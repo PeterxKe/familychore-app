@@ -18,12 +18,12 @@ def show_avatarshop():
         "cat": {
             "name": "Katze",
             "cost": 50,
-            "img": ""https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/cat.png""
+            "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/cat.png"
         },
         "robot": {
             "name": "Roboter",
             "cost": 100,
-            "img": ""https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/android.png"
+            "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/android.png"
         },
         "ninja": {
             "name": "Ninja",
