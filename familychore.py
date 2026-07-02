@@ -220,6 +220,7 @@ if st.session_state.auth_mode == "register":
                 "tasks": [],
                 "note": "",
                 "email": email_user
+                "points": 0,
             })
 
             send_email(
