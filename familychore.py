@@ -370,11 +370,6 @@ AVATARS = {
 if st.session_state.role == "child":
     st.header("🧒 Kinder-Dashboard")
         # Avatar laden
-    CURRENT_FAMILY = st.session_state.family
-
-    if st.session_state.page == "avatarshop":
-        show_avatarshop()
-        st.stop()
 
     owned = db.reference(f"families/{CURRENT_FAMILY}/avatars").get() or {}
     
