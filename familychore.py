@@ -9,6 +9,56 @@ from email.mime.text import MIMEText
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
+def show_avatarshop():
+    st.title("Avatarshop 😺")
+
+    points = db.reference(f"families/{CURRENT_FAMILY}/points").get() or 0
+    st.write(f"Du hast **{points} Punkte**")
+    AVATARS = {
+        "cat": {
+            "name": "Katze",
+            "cost": 50,
+            "img": "https://i.imgur.com/3ZQ3ZQO.png"
+        },
+        "robot": {
+            "name": "Roboter",
+            "cost": 100,
+            "img": "https://i.imgur.com/8fQ2QwL.png"
+        },
+        "ninja": {
+            "name": "Ninja",
+            "cost": 150,
+            "img": "https://i.imgur.com/1kXgk5G.png"
+        }
+    }
+
+
+    avatars_ref = db.reference(f"families/{CURRENT_FAMILY}/avatars")
+    owned = avatars_ref.get() or {}
+
+    for name, cost in AVATARS.items():
+        cols = st.columns([3, 1])
+        with cols[0]:
+            st.write(f"{name} – {cost} Punkte")
+        with cols[1]:
+            if owned.get(name):
+                st.write("✔️")
+            else:
+                if points >= cost:
+                    if st.button(f"Kaufen {name}", key=f"buy_{name}"):
+                        avatars_ref.child(name).set(True)
+                        db.reference(f"families/{CURRENT_FAMILY}/points").set(points - cost)
+                        st.success(f"{name} gekauft!")
+                        st.rerun()
+                else:
+                    st.write("❌")
+
+
+if st.session_state.page == "avatarshop":
+    show_avatarshop()
+    st.stop()
+
+
 
 def show_datenschutz():
     st.title("Datenschutzerklärung")
@@ -306,7 +356,26 @@ if st.session_state.role == "parent":
 # --- Kinder-Sicht ---
 if st.session_state.role == "child":
     st.header("🧒 Kinder-Dashboard")
-    st.write(f"Familie: {CURRENT_FAMILY}")
+        # Avatar laden
+    owned = db.reference(f"families/{CURRENT_FAMILY}/avatars").get() or {}
+    
+    selected_avatar = None
+    for key in AVATARS:
+        if owned.get(key):
+            selected_avatar = key
+            break
+    
+    # Name + Avatar nebeneinander
+    cols = st.columns([0.15, 0.85])
+    
+    with cols[0]:
+        if selected_avatar:
+            st.image(AVATARS[selected_avatar]["img"], width=40)
+        else:
+            st.image("https://i.imgur.com/3ZQ3ZQO.png", width=40)  # Default Avatar
+    
+    with cols[1]:
+    st.write(f"**Familie: {CURRENT_FAMILY}**")
 
     # --- Notiz aus Firebase laden ---
     note_ref = db.reference(f"families/{CURRENT_FAMILY}/note")
@@ -337,6 +406,13 @@ if st.session_state.role == "child":
                 if task["status"] == "pending":
                     if st.button("Done", key=f"done_{i}"):
                         db.reference(f"families/{CURRENT_FAMILY}/tasks/{i}/status").set("done")
+                        
+                        # Punkte hinzufügen
+                        points_ref = db.reference(f"families/{CURRENT_FAMILY}/points")
+                        current_points = points_ref.get() or 0
+                        points_ref.set(current_points + 10)  # 10 Punkte pro Aufgabe
+                    
+                        st.success("Aufgabe erledigt! +10 Punkte")
                         st.rerun()
                         
     st.subheader("Beweisfoto hochladen")
@@ -362,6 +438,12 @@ if st.session_state.role == "child":
 
 # --- Sidebar ---
 st.sidebar.header("Menü")
+
+if st.session_state.role == "child":
+    if st.sidebar.button("😺 Avatarshop"):
+        st.session_state.page = "avatarshop"
+        st.rerun()
+
 if st.sidebar.button("🔙 Logout"):
     st.session_state.role = None
     st.session_state.family = None
