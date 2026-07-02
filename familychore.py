@@ -6,6 +6,25 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 
+AVATARS = {
+    "cat": {
+        "name": "Katze",
+        "cost": 50,
+        "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/cat.png"
+    },
+    "robot": {
+        "name": "Roboter",
+        "cost": 100,
+        "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/android.png"
+    },
+    "ninja": {
+        "name": "Ninja",
+        "cost": 150,
+        "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user-secret.png"
+    }
+}
+
+
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
