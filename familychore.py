@@ -219,8 +219,8 @@ if st.session_state.auth_mode == "register":
                 "child_pw": child_pw,
                 "tasks": [],
                 "note": "",
-                "email": email_user
-                "points": 0,
+                "email": email_user,
+                "points": 0
             })
 
             send_email(
