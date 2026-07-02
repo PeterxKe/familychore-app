@@ -308,6 +308,14 @@ if st.session_state.auth_mode == "login" and (st.session_state.family is None or
 
 # Ab hier sind Familie + Rolle gesetzt
 CURRENT_FAMILY = st.session_state.family
+# --- AUTO-FIX: Tasks reparieren ---
+tasks_ref = db.reference(f"families/{CURRENT_FAMILY}/tasks")
+tasks_value = tasks_ref.get()
+
+# Wenn tasks KEIN Array ist → reparieren
+if not isinstance(tasks_value, list):
+    tasks_ref.set([])  # leere Liste setzen
+
 if st.session_state.page == "avatarshop":
     show_avatarshop()
     st.stop()
@@ -386,9 +394,6 @@ if st.session_state.role == "child":
         if owned.get(key):
             selected_avatar = key
             break
-    
-    st.write("DEBUG owned:", owned)
-    st.write("DEBUG selected_avatar:", selected_avatar)
     
     cols = st.columns([0.15, 0.85])
     
