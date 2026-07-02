@@ -365,7 +365,6 @@ AVATARS = {
 if st.session_state.role == "child":
     st.write("DEBUG:", CURRENT_FAMILY, db.reference(f"families/{CURRENT_FAMILY}/avatars").get())
     st.header("🧒 Kinder-Dashboard")
-    # Avatar laden
 
     owned = db.reference(f"families/{CURRENT_FAMILY}/avatars").get() or {}
     
@@ -375,14 +374,13 @@ if st.session_state.role == "child":
             selected_avatar = key
             break
     
-    # Name + Avatar nebeneinander
     cols = st.columns([0.15, 0.85])
     
     with cols[0]:
         if selected_avatar:
             st.image(AVATARS[selected_avatar]["img"], width=40)
         else:
-            st.image("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user.png", width=40) # Default Avatar
+            st.image("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user.png", width=40)
     
     with cols[1]:
         st.write(f"**Familie: {CURRENT_FAMILY}**")
