@@ -18,17 +18,17 @@ def show_avatarshop():
         "cat": {
             "name": "Katze",
             "cost": 50,
-            "img": "https://i.imgur.com/3ZQ3ZQO.png"
+            "img": ""https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/cat.png""
         },
         "robot": {
             "name": "Roboter",
             "cost": 100,
-            "img": "https://i.imgur.com/8fQ2QwL.png"
+            "img": ""https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/android.png"
         },
         "ninja": {
             "name": "Ninja",
             "cost": 150,
-            "img": "https://i.imgur.com/1kXgk5G.png"
+            "img": "https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user-secret.png"
         }
     }
 
