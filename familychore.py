@@ -36,16 +36,17 @@ def show_avatarshop():
     avatars_ref = db.reference(f"families/{CURRENT_FAMILY}/avatars")
     owned = avatars_ref.get() or {}
 
-    for name, cost in AVATARS.items():
+    for key, data in AVATARS.items():
+
         cols = st.columns([3, 1])
         with cols[0]:
-            st.write(f"{name} – {cost} Punkte")
+            st.write(f"{data['name']} – {data['cost']} Punkte")
         with cols[1]:
-            if owned.get(name):
+            if owned.get(key):
                 st.write("✔️")
             else:
                 if points >= cost:
-                    if st.button(f"Kaufen {name}", key=f"buy_{name}"):
+                    if st.button(f"Kaufen {data['name']}", key=f"buy_{key}"):
                         avatars_ref.child(name).set(True)
                         db.reference(f"families/{CURRENT_FAMILY}/points").set(points - cost)
                         st.success(f"{name} gekauft!")
