@@ -387,6 +387,9 @@ if st.session_state.role == "child":
             selected_avatar = key
             break
     
+    st.write("DEBUG owned:", owned)
+    st.write("DEBUG selected_avatar:", selected_avatar)
+    
     cols = st.columns([0.15, 0.85])
     
     with cols[0]:
