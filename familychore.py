@@ -7,9 +7,9 @@ import smtplib
 from email.mime.text import MIMEText
 
 AVATARS = {
-    "cat": {"img": "https://i.imgur.com/3ZQ3ZQO.png"},
-    "robot": {"img": "https://i.imgur.com/8fQ2QwL.png"},
-    "ninja": {"img": "https://i.imgur.com/1kXgk5G.png"}
+    "cat": {"img": "https://i.imgur.com/4AiXzf8.jpeg"},
+    "robot": {"img": "https://i.imgur.com/2JYhQmO.png"},
+    "ninja": {"img": "https://i.imgur.com/7D2Q5QF.png"}
 }
 
 
