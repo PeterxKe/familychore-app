@@ -6,6 +6,13 @@ import json
 import smtplib
 from email.mime.text import MIMEText
 
+AVATARS = {
+    "cat": {"img": "https://i.imgur.com/3ZQ3ZQO.png"},
+    "robot": {"img": "https://i.imgur.com/8fQ2QwL.png"},
+    "ninja": {"img": "https://i.imgur.com/1kXgk5G.png"}
+}
+
+
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
