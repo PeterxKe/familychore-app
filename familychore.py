@@ -14,11 +14,6 @@ def show_avatarshop():
 
     CURRENT_FAMILY = st.session_state.family
 
-    if st.session_state.page == "avatarshop":
-        show_avatarshop()
-        st.stop()
-
-
     points = db.reference(f"families/{CURRENT_FAMILY}/points").get() or 0
     st.write(f"Du hast **{points} Punkte**")
     AVATARS = {
@@ -52,20 +47,14 @@ def show_avatarshop():
             if owned.get(key):
                 st.write("✔️")
             else:
-                if points >= cost:
+                if points >= data["cost"]:
                     if st.button(f"Kaufen {data['name']}", key=f"buy_{key}"):
                         avatars_ref.child(name).set(True)
                         db.reference(f"families/{CURRENT_FAMILY}/points").set(points - cost)
-                        st.success(f"{name} gekauft!")
+                        st.success(f"{data['name']} gekauft!")
                         st.rerun()
                 else:
                     st.write("❌")
-
-
-if st.session_state.page == "avatarshop":
-    show_avatarshop()
-    st.stop()
-
 
 
 def show_datenschutz():
@@ -298,6 +287,10 @@ if st.session_state.auth_mode == "login" and (st.session_state.family is None or
 
 # Ab hier sind Familie + Rolle gesetzt
 CURRENT_FAMILY = st.session_state.family
+if st.session_state.page == "avatarshop":
+    show_avatarshop()
+    st.stop()
+
 
 # --- Preset Aufgaben ---
 PRESET_TASKS = [
