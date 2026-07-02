@@ -363,7 +363,6 @@ AVATARS = {
 # --- Kinder-Sicht ---
 
 if st.session_state.role == "child":
-    st.write("DEBUG:", CURRENT_FAMILY, db.reference(f"families/{CURRENT_FAMILY}/avatars").get())
     st.header("🧒 Kinder-Dashboard")
 
     owned = db.reference(f"families/{CURRENT_FAMILY}/avatars").get() or {}
