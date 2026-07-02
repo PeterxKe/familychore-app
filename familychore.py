@@ -359,6 +359,12 @@ AVATARS = {
     
 
 # --- Kinder-Sicht ---
+CURRENT_FAMILY = st.session_state.family
+
+if st.session_state.page == "avatarshop":
+    show_avatarshop()
+    st.stop()
+
 if st.session_state.role == "child":
     st.header("🧒 Kinder-Dashboard")
         # Avatar laden
