@@ -375,7 +375,7 @@ if st.session_state.role == "child":
             st.image("https://i.imgur.com/3ZQ3ZQO.png", width=40)  # Default Avatar
     
     with cols[1]:
-    st.write(f"**Familie: {CURRENT_FAMILY}**")
+        st.write(f"**Familie: {CURRENT_FAMILY}**")
 
     # --- Notiz aus Firebase laden ---
     note_ref = db.reference(f"families/{CURRENT_FAMILY}/note")
