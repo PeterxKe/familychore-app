@@ -30,7 +30,7 @@ if "page" not in st.session_state:
 
 def show_profile():
     CURRENT_FAMILY = st.session_state.family
-
+    
     st.title("👤 Profil")
 
     # Avatar laden
@@ -62,6 +62,10 @@ def show_profile():
     st.write("### Aufgaben-Statistik")
     st.write(f"Erledigt: {done}")
     st.write(f"Offen: {pending}")
+
+    if st.sidebar.button("🔙zurück"):
+        st.session_state.page = "dashboard"
+        st.rerun()
 
 
 def show_avatarshop():
@@ -339,6 +343,7 @@ if st.session_state.auth_mode == "login" and (st.session_state.family is None or
                 db.reference(f"families/{fam_name}/tasks").set([])
                 db.reference(f"families/{fam_name}/note").set([])
                 db.reference(f"families/{fam_name}/last_reset").set(today)
+                db.reference(f"families/{fam_name}/proof").set([])
 
             st.success(f"Erfolgreich eingeloggt als {found_role} von {found_family}")
             st.rerun()
