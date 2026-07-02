@@ -192,6 +192,10 @@ def show_datenschutz():
 if st.session_state.page == "datenschutz":
     show_datenschutz()
     st.stop()
+    
+if st.session_state.page == "profile":
+    show_profile()
+    st.stop()
 
 def send_email(to, subject, body):
     sender = "kemmeterpeter@gmail.com"
