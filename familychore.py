@@ -382,6 +382,9 @@ PRESET_TASKS = [
     "Müll rausbringen",
     "Staubsaugen",
     "Tisch abwischen",
+    "Wischen Oberflächen",
+    "Wischen Boden",
+    "Wäsche machen",
     "Einkaufen (notitz)"
 ]
 
