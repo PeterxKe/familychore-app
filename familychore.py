@@ -109,9 +109,11 @@ def show_avatarshop():
                 if points >= data["cost"]:
                     if st.button(f"Kaufen {data['name']}", key=f"buy_{key}"):
                         avatars_ref.child(key).set(True)
+                        db.reference(f"families/{CURRENT_FAMILY}/selected_avatar").set(key)
                         db.reference(f"families/{CURRENT_FAMILY}/points").set(points - data["cost"])
                         st.success(f"{data['name']} gekauft!")
                         st.rerun()
+
                 else:
                     st.write("❌")
     
