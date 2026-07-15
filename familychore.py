@@ -34,12 +34,7 @@ def show_profile():
     st.title("👤 Profil")
 
     # Avatar laden
-    owned = db.reference(f"families/{CURRENT_FAMILY}/avatars").get() or {}
-    selected_avatar = None
-    for key in AVATARS:
-        if owned.get(key):
-            selected_avatar = key
-            break
+    selected_avatar = db.reference(f"families/{CURRENT_FAMILY}/selected_avatar").get()
 
     # Avatar anzeigen
     if selected_avatar:
@@ -72,6 +67,7 @@ def show_avatarshop():
     st.title("Avatarshop 😺")
 
     CURRENT_FAMILY = st.session_state.family
+    selected_avatar: "cat" oder "robot" oder "ninja"
 
     points = db.reference(f"families/{CURRENT_FAMILY}/points").get() or 0
     st.write(f"Du hast **{points} Punkte**")
