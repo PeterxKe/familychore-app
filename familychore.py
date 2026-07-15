@@ -35,12 +35,13 @@ def show_profile():
 
     # Avatar laden
     selected_avatar = db.reference(f"families/{CURRENT_FAMILY}/selected_avatar").get()
-
-    # Avatar anzeigen
-    if selected_avatar:
-        st.image(AVATARS[selected_avatar]["img"], width=80)
-    else:
+    
+    # Wenn keiner ausgewählt ist → neutraler Avatar
+    if not selected_avatar:
         st.image("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/64/user.png", width=80)
+    else:
+        st.image(AVATARS[selected_avatar]["img"], width=80)
+
 
     # Familienname
     st.subheader(f"Familie: {CURRENT_FAMILY}")
@@ -100,6 +101,12 @@ def show_avatarshop():
             st.write(f"{data['name']} – {data['cost']} Punkte")
         with cols[1]:
             if owned.get(key):
+                
+                if st.button(f"Auswählen {data['name']}", key=f"select_{key}"):
+                    db.reference(f"families/{CURRENT_FAMILY}/selected_avatar").set(key)
+                    st.success(f"{data['name']} ausgewählt!")
+                    st.rerun()
+
                 st.write("✔️")
             else:
                 if points >= data["cost"]:
