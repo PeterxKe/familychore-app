@@ -20,7 +20,7 @@ AVATARS = {
     "ninja": {
         "name": "Ninja",
         "cost": 150,
-        "img": "https://cdn-icons-png.flaticon.com/512/4712/4712100.png"
+        "img": "https://cdn-icons-png.magnific.com/512/3705/3705541.png"
     }
 }
 
